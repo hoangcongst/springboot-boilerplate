@@ -1,0 +1,43 @@
+{
+  "properties": [
+    {
+      "name": "jwt.http.request.header",
+      "type": "java.lang.String",
+      "description": "Description for jwt.http.request.header."
+    },
+    {
+      "name": "jwt.token.expiration.in.seconds",
+      "type": "java.lang.String",
+      "description": "Description for jwt.token.expiration.in.seconds."
+    },
+    {
+      "name": "jwt.signing.key.secret",
+      "type": "java.lang.String",
+      "description": "Description for jwt.signing.key.secret."
+    },
+    {
+      "name": "user_table",
+      "type": "java.lang.String",
+      "description": "Description for user_table."
+    },
+    {
+      "name": "jwt.get.token.uri",
+      "type": "java.lang.String",
+      "description": "Description for jwt.get.token.uri."
+    },
+    {
+      "name": "jwt.refresh.token.uri",
+      "type": "java.lang.String",
+      "description": "Description for jwt.refresh.token.uri."
+    },
+    {
+      "name": "encrypt_key",
+      "type": "java.lang.String",
+      "description": "Description for encrypt_key."
+    },
+    {
+      "name": "log.suffix",
+      "type": "java.lang.String",
+      "description": "Description for log.suffix."
+    }
+  ] }

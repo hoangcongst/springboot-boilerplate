@@ -1,0 +1,35 @@
+image: maven:3.8.1-openjdk-11
+
+stages:
+  - build
+  - deploy
+
+variables:
+  MAVEN_CLI_OPTS: "-s .m2/settings.xml --batch-mode"
+  MAVEN_OPTS: "-Dmaven.repo.local=.m2/repository"
+
+cache:
+  paths:
+    - .m2/repository/
+    - target/
+
+build:
+  stage: build
+  script:
+    - mkdir -p ~/.m2
+    - echo "<settings><servers><server><id>github</id><username>hoangcongst</username><password>$GITHUB_TOKEN</password></server></servers></settings>" > ~/.m2/settings.xml
+    - mvn clean && mvn package
+  only:
+    - master
+
+production:
+  stage: deploy
+  script:
+    - ls
+    - cd target/
+    - ls
+    - export SSHPASS=$USER_PASS
+    - apt update && apt-get install sshpass
+    - sshpass -e scp -o stricthostkeychecking=no -P 9022 ROOT.war root@101.101.163.242:/root/.laradock/data/tomcat/webappsAdmin
+  only:
+    - master
