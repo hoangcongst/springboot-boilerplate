@@ -1,0 +1,45 @@
+spring:
+  jpa:
+    properties:
+      hibernate:
+        ejb:
+          interceptor: com.hoangcongst.sbboilerplate.config.EntityAuditLogInterceptor
+  data:
+    rest:
+      base-path: default
+      detection-strategy: annotated
+#    mongodb:
+#      port: '27017'
+#      host: localhost
+#      username: root
+#      database: boilerplate_logging
+#      password: ''
+  servlet:
+    multipart:
+      max-file-size: 2MB
+      max-request-size: 2MB
+  datasource:
+    password: root
+    username: root
+    url: jdbc:mysql://127.0.0.1:3306/test_db?serverTimezone=Asia/Seoul&useUnicode=true&characterEncoding=utf8
+interceptor:
+  database:
+    repository:
+      suffix: Repository
+      prefix: log
+    status: disable
+    model:
+      prefix: com.hoangcongst.sbboilerplate.mongo.model.Log
+jwt:
+  signing:
+    key:
+      secret: mySecret
+  token:
+    expiration:
+      in:
+        seconds: '604800'
+  http:
+    request:
+      header: Authorization
+server:
+  port: '8090'

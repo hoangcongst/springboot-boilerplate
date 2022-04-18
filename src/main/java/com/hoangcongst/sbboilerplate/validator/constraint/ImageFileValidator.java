@@ -1,6 +1,6 @@
 package com.hoangcongst.sbboilerplate.validator.constraint;
 
-import com.hoangcongst.sbboilerplate.annotation.ValidImage;
+import com.hoangcongst.sbboilerplate.validator.annotation.ValidImage;
 import org.springframework.web.multipart.MultipartFile;
 
 import javax.validation.ConstraintValidator;

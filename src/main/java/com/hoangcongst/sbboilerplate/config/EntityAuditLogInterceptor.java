@@ -1,6 +1,6 @@
 package com.hoangcongst.sbboilerplate.config;
 
-import com.hoangcongst.sbboilerplate.model.User;
+import com.hoangcongst.sbboilerplate.auth.model.User;
 import com.hoangcongst.sbboilerplate.util.SpringContextUtil;
 import com.conght.common.database.interceptor.BaseEntityAuditLogInterceptor;
 import com.conght.common.database.interceptor.model.BaseLogEntityChange;

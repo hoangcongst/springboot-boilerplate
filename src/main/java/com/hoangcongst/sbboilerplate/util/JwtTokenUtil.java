@@ -1,6 +1,6 @@
 package com.hoangcongst.sbboilerplate.util;
 
-import com.hoangcongst.sbboilerplate.model.User;
+import com.hoangcongst.sbboilerplate.auth.model.User;
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Clock;
 import io.jsonwebtoken.Jwts;
