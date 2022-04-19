@@ -1,5 +1,6 @@
 package com.hoangcongst.sbboilerplate.auth.service;
 
+import com.conght.common.requestcriteria.util.RequestPropertiesUtil;
 import com.hoangcongst.sbboilerplate.auth.UserRepository;
 import com.hoangcongst.sbboilerplate.auth.exception.UserNotFoundException;
 import com.hoangcongst.sbboilerplate.auth.model.User;
@@ -8,7 +9,6 @@ import com.hoangcongst.sbboilerplate.auth.vo.AdminIndexRequest;
 import com.hoangcongst.sbboilerplate.auth.UserSpecification;
 import com.conght.common.requestcriteria.builder.GenericSpecificationsBuilder;
 import com.conght.common.requestcriteria.util.CriteriaParser;
-import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.domain.Specification;
@@ -29,7 +29,11 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public User create(UserCreateRequest userCreateRequest) {
-        return null;
+        User user = new User();
+        RequestPropertiesUtil.copyNonNullProperties(userCreateRequest, user);
+        BCryptPasswordEncoder bCryptPasswordEncoder = new BCryptPasswordEncoder(BCryptPasswordEncoder.BCryptVersion.$2A);
+        user.setPassword(bCryptPasswordEncoder.encode(user.getPassword()));
+        return this.mUserRepository.save(user);
     }
 
     @Override
@@ -61,8 +65,8 @@ public class UserServiceImpl implements UserService {
             if (!findUser.getEmail().equals(userUpdateRequest.getEmail()))
                 findUser.setEmail(userUpdateRequest.getEmail());
 
-            if (!findUser.getName().equals(userUpdateRequest.getDisplay_name()))
-                findUser.setName(userUpdateRequest.getDisplay_name());
+            if (!findUser.getDisplayName().equals(userUpdateRequest.getDisplay_name()))
+                findUser.setDisplayName(userUpdateRequest.getDisplay_name());
 
             if (userUpdateRequest.getPassword() != null) {
                 BCryptPasswordEncoder bCryptPasswordEncoder = new BCryptPasswordEncoder(BCryptPasswordEncoder.BCryptVersion.$2A);

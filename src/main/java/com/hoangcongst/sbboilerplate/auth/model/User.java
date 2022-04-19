@@ -29,7 +29,7 @@ public class User extends BaseModel implements UserDetails {
 	private long id;
 
 	@Column(name = "display_name")
-	private String name;
+	private String displayName;
 	@JsonIgnore
 	private String email;
 	@JsonIgnore
@@ -40,14 +40,13 @@ public class User extends BaseModel implements UserDetails {
 	@JsonIgnore
 	@Transient
 	@OneToOne
-	@JoinColumn(name="ins_admin_id")
-	private User insertUser;
+	private User createBy;
 	@Column(nullable = false, updatable = false)
 	@CreatedDate
-	private Timestamp created_at;
+	private Timestamp createdAt;
 
 	@LastModifiedDate
-	private Timestamp updated_at;
+	private Timestamp updatedAt;
 
 	public User() {}
 
@@ -55,7 +54,7 @@ public class User extends BaseModel implements UserDetails {
 
 	public User(String name,
                 String email, String password, int status) {
-		this.name = name;
+		this.displayName = name;
 		this.email = email;
 		this.password = password;
 		this.status = status;

@@ -16,12 +16,14 @@ import java.lang.reflect.Method;
 public class EntityAuditLogInterceptor extends BaseEntityAuditLogInterceptor {
     @Override
     public UserInfoLog getUser() {
-        Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        try {
+            Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
 
-        if (principal instanceof UserDetails) {
-            User mUser = ((User)principal);
-            return new UserInfoLog(mUser.getId(), mUser.getUsername());
-        }
+            if (principal instanceof UserDetails) {
+                User mUser = ((User)principal);
+                return new UserInfoLog(mUser.getId(), mUser.getUsername());
+            }
+        } catch (Exception ignored) {}
         return new UserInfoLog(0L, "");
     }
 
